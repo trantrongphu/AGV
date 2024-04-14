@@ -1,0 +1,607 @@
+[
+    {
+        "id": "734fb9fccc88994d",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f115c0764c6fc624",
+        "type": "aedes broker",
+        "z": "734fb9fccc88994d",
+        "name": "",
+        "mqtt_port": 1883,
+        "mqtt_ws_bind": "port",
+        "mqtt_ws_port": "",
+        "mqtt_ws_path": "",
+        "cert": "",
+        "key": "",
+        "certname": "",
+        "keyname": "",
+        "persistence_bind": "memory",
+        "dburl": "",
+        "usetls": false,
+        "x": 370,
+        "y": 280,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "8051d7c70ffb94b9",
+        "type": "mqtt in",
+        "z": "734fb9fccc88994d",
+        "name": "",
+        "topic": "ESP8266_AVG",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ce9e502bad2970ef",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 580,
+        "wires": [
+            [
+                "c3e0e29d120a70e7",
+                "4e91926dd8c8f4e6",
+                "7a8b30654924d6db"
+            ]
+        ]
+    },
+    {
+        "id": "3ec84ce7bc74a61b",
+        "type": "mqtt out",
+        "z": "734fb9fccc88994d",
+        "name": "",
+        "topic": "ESP8266_AVG",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ce9e502bad2970ef",
+        "x": 880,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "7880111e99ac11be",
+        "type": "ui_text",
+        "z": "734fb9fccc88994d",
+        "group": "7311a8d3c451fac0",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "client1_line_1",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1040,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "efca8ab941d69dfa",
+        "type": "json",
+        "z": "734fb9fccc88994d",
+        "name": "convert to object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 520,
+        "y": 480,
+        "wires": [
+            [
+                "60e1656d9f985792",
+                "f26ad86bad7e29bc",
+                "a9ef32448772e097"
+            ]
+        ]
+    },
+    {
+        "id": "60e1656d9f985792",
+        "type": "function",
+        "z": "734fb9fccc88994d",
+        "name": "pick up value client 1_line 1",
+        "func": "\nvar value = msg.payload.Client1\nif (value!=0 )\n{\n    msg.payload  = value\n}\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 400,
+        "wires": [
+            [
+                "7880111e99ac11be"
+            ]
+        ]
+    },
+    {
+        "id": "c3e0e29d120a70e7",
+        "type": "json",
+        "z": "734fb9fccc88994d",
+        "name": "convert to Json string",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 320,
+        "y": 480,
+        "wires": [
+            [
+                "efca8ab941d69dfa"
+            ]
+        ]
+    },
+    {
+        "id": "67407f49d59e2656",
+        "type": "ui_text",
+        "z": "734fb9fccc88994d",
+        "group": "7311a8d3c451fac0",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "client2_line_1",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1060,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "0484b4b0954b5677",
+        "type": "json",
+        "z": "734fb9fccc88994d",
+        "name": "convert to object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 520,
+        "y": 720,
+        "wires": [
+            [
+                "90d6e475368521d9",
+                "2d5574956fa1102a",
+                "a9ef32448772e097"
+            ]
+        ]
+    },
+    {
+        "id": "90d6e475368521d9",
+        "type": "function",
+        "z": "734fb9fccc88994d",
+        "name": "pick up value client 2_line 1",
+        "func": "var value = msg.payload.client2_line1\nif (value != 0) \n{\n    msg.payload = value\n}\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 660,
+        "wires": [
+            [
+                "67407f49d59e2656"
+            ]
+        ]
+    },
+    {
+        "id": "4e91926dd8c8f4e6",
+        "type": "json",
+        "z": "734fb9fccc88994d",
+        "name": "convert to Json string",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 300,
+        "y": 720,
+        "wires": [
+            [
+                "0484b4b0954b5677"
+            ]
+        ]
+    },
+    {
+        "id": "f26ad86bad7e29bc",
+        "type": "function",
+        "z": "734fb9fccc88994d",
+        "name": "pick up value client 1_line 2",
+        "func": "\nvar value = msg.payload.client1_NG\nif (value!=0 )\n{\n    msg.payload  = value\n}\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 480,
+        "wires": [
+            [
+                "cc452e349965a9cb"
+            ]
+        ]
+    },
+    {
+        "id": "cc452e349965a9cb",
+        "type": "ui_text",
+        "z": "734fb9fccc88994d",
+        "group": "7311a8d3c451fac0",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "client1_line_2",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1040,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "2d5574956fa1102a",
+        "type": "function",
+        "z": "734fb9fccc88994d",
+        "name": "pick up value client 2_line 2",
+        "func": "var value = msg.payload.client2_line2\nif (value != 0) \n{\n    msg.payload = value\n}\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 760,
+        "wires": [
+            [
+                "98ee9196b3202f93"
+            ]
+        ]
+    },
+    {
+        "id": "98ee9196b3202f93",
+        "type": "ui_text",
+        "z": "734fb9fccc88994d",
+        "group": "7311a8d3c451fac0",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "client2_line_2",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1080,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "f9e9ac68990d65fa",
+        "type": "ui_button",
+        "z": "734fb9fccc88994d",
+        "name": "",
+        "group": "7311a8d3c451fac0",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "button_start",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "ON",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 610,
+        "y": 240,
+        "wires": [
+            [
+                "3ec84ce7bc74a61b"
+            ]
+        ]
+    },
+    {
+        "id": "cc14404c4a2abba4",
+        "type": "ui_button",
+        "z": "734fb9fccc88994d",
+        "name": "",
+        "group": "7311a8d3c451fac0",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "button_stop",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "OFF",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 610,
+        "y": 340,
+        "wires": [
+            [
+                "3ec84ce7bc74a61b"
+            ]
+        ]
+    },
+    {
+        "id": "a9ef32448772e097",
+        "type": "function",
+        "z": "734fb9fccc88994d",
+        "name": "identify client",
+        "func": "var data=msg.payload\nvar avg=\"\";\nvar result\n\nswitch (data)\n{\n    case 1 :\n        {\n            result= {\"AVG to client \" : 1};\n            data=0;\n            break;\n        }\n    case 2 :\n        {\n            result= {\"AVG to client \" : 2};\n            data=0;\n            break;\n        }\n    case 3 :\n        {\n            result= {\"AVG to client \" : 3};\n            data=0;\n            break;\n        }\n    default:\n        result = \" AVG is available\";\n\n}\nmsg.payload = result;\n// msg.payload = { \"message\": result };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 580,
+        "wires": [
+            [
+                "d4e7dad5c365d3b0"
+            ]
+        ]
+    },
+    {
+        "id": "0906fedcb6c0d388",
+        "type": "ui_text",
+        "z": "734fb9fccc88994d",
+        "group": "7311a8d3c451fac0",
+        "order": 10,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "AVG status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1070,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "d4e7dad5c365d3b0",
+        "type": "function",
+        "z": "734fb9fccc88994d",
+        "name": "client",
+        "func": "var data = msg.payload\nmsg.payload = data[\"AVG to client \" ]",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 580,
+        "wires": [
+            [
+                "0906fedcb6c0d388",
+                "dcb48a265f8f7339",
+                "3ec84ce7bc74a61b"
+            ]
+        ]
+    },
+    {
+        "id": "dcb48a265f8f7339",
+        "type": "debug",
+        "z": "734fb9fccc88994d",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1060,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "76aab60e72e105c9",
+        "type": "ui_text",
+        "z": "734fb9fccc88994d",
+        "group": "7311a8d3c451fac0",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "client3_line_1",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1080,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "ba4a35f1510fb410",
+        "type": "json",
+        "z": "734fb9fccc88994d",
+        "name": "convert to object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 540,
+        "y": 880,
+        "wires": [
+            [
+                "efaed2fd85fec4c4",
+                "6a98cb7d811180b3",
+                "a9ef32448772e097"
+            ]
+        ]
+    },
+    {
+        "id": "efaed2fd85fec4c4",
+        "type": "function",
+        "z": "734fb9fccc88994d",
+        "name": "pick up value client 3_line 1",
+        "func": "var value = msg.payload.client3_line1\nif (value != 0) \n{\n    msg.payload = value\n}\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 820,
+        "wires": [
+            [
+                "76aab60e72e105c9"
+            ]
+        ]
+    },
+    {
+        "id": "7a8b30654924d6db",
+        "type": "json",
+        "z": "734fb9fccc88994d",
+        "name": "convert to Json string",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 320,
+        "y": 880,
+        "wires": [
+            [
+                "ba4a35f1510fb410"
+            ]
+        ]
+    },
+    {
+        "id": "6a98cb7d811180b3",
+        "type": "function",
+        "z": "734fb9fccc88994d",
+        "name": "pick up value client 3_line 2",
+        "func": "var value = msg.payload.client3_line2\nif (value != 0) \n{\n    msg.payload = value\n}\nreturn msg",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 920,
+        "wires": [
+            [
+                "40fd12be2db113c5"
+            ]
+        ]
+    },
+    {
+        "id": "40fd12be2db113c5",
+        "type": "ui_text",
+        "z": "734fb9fccc88994d",
+        "group": "7311a8d3c451fac0",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "client3_line_2",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1100,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "ce9e502bad2970ef",
+        "type": "mqtt-broker",
+        "name": "Local Server",
+        "broker": "192.168.0.132",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "7311a8d3c451fac0",
+        "type": "ui_group",
+        "name": "trang chủ ",
+        "tab": "241e7ba8fc2be74c",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "241e7ba8fc2be74c",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
